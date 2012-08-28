@@ -1,0 +1,28 @@
+Freeman Pyramid MEX Interface
+-----------------------------
+
+June 2001, Thomas F.El-Maraghi
+
+The source code in this directory builds a MEX interface
+to the Freeman pyramid C code.  
+
+You will need to do the following:
+
+1. Compile the code for your system.
+
+	- select the Makefile that applies to you (e.g.,
+          Makefile.matlab53.solaris for Matlab 5.3 and
+	  the Solaris operating system).
+
+	- at the top of the make file, change the macro
+	  MATLAB to point to the directory where Matlab
+          is installed on your sytem.
+
+        - compile the code (e.g., make -f Makefile.matlab53.solaris)
+
+2. Add this directory to your Matlab path.
+
+3. Type help freemanPyramid at the Matlab prompt for
+   information on how to use the MEX function (or view
+   freemanPyramid.m directly).
+

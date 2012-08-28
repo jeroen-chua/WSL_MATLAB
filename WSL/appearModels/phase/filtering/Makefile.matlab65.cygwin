@@ -1,0 +1,88 @@
+MATLAB=c:\Software\MATLAB6p5p1
+MEX=${MATLAB}/extern/include
+
+# Macro to use the MEX version of the dlltool
+DLLTOOL=mexdlltool -E --as c:\Software\cygwin\bin\as.exe
+
+# C compiler macros with MEX flags and directories
+CC=gcc -O3 -DNDEBUG -c -DMATLAB_MEX_FILE -I . -I ${MEX} -malign-double -fno-exceptions -mno-cygwin -march=pentium4 -mfpmath=sse
+#CC=gcc -g -DNDEBUG -c -DMATLAB_MEX_FILE -I . -I ${MEX} -malign-double -fno-exceptions -mno-cygwin -march=pentium4 -mfpmath=sse
+
+#------------------------------------------------------------------------
+# Header and object files
+
+MEX_H = ${MEX}/mex.h mextools.h
+MEX_OBJ = mextools.o 
+
+UTILS_OBJ = utils.o imageFile-io.o
+UTILS_H = macros.h utils.h imageFile-io.h endianness.h
+
+FILTER_OBJ = freemanPyramid.o phaseUtil.o
+FILTER_H = freemanPyramid.h phaseUtil.h phase.h
+
+
+#------------------------------------------------------------------------
+# MEX executables 
+
+freemanPyramid: mexFunction.o ${FILTER_OBJ} ${UTILS_OBJ} ${MEX_OBJ} \
+	dllmain.o libmat.lib libmx.lib libmex.lib _libmatlbmx.lib
+	dllwrap --def mex.def -mno-cygwin -mwindows -o freemanPyramid.dll \
+	mexFunction.o ${FILTER_OBJ} ${UTILS_OBJ} ${MEX_OBJ} \
+	dllmain.o libmat.lib libmx.lib libmex.lib _libmatlbmx.lib
+
+#------------------------------------------------------------------------
+# Object file targets
+
+utils.o: utils.c ${UTILS_H} ${MEX_H}
+	${CC} -c -I ${MEX} utils.c -o utils.o
+
+imageFile-io.o: imageFile-io.V2.0.c ${UTILS_H} ${MEX_H}
+	${CC} -c -I ${MEX} imageFile-io.V2.0.c -o imageFile-io.o
+
+phaseUtil.o: phaseUtil.V4.0.c ${UTILS_H} ${FILTER_H} ${MEX_H}
+	${CC} -c -I ${MEX} phaseUtil.V4.0.c -o phaseUtil.o
+
+freemanPyramid.o: freemanPyramid.c ${UTILS_H} ${FILTER_H} 
+	${CC} -c -I ${MEX} freemanPyramid.c -o freemanPyramid.o
+
+mexFunction.o: mexFunction.c ${UTILS_H} ${FILTER_H} ${MEX_H}
+	${CC} -c -I ${MEX} mexFunction.c -o mexFunction.o
+
+mextools.o: mextools.c ${MEX_H}
+	${CC} -c -I ${MEX} mextools.c -o mextools.o
+
+#------------------------------------------------------------------------
+#  MEX DLL files
+
+dllmain.o: dllmain.c
+
+mex.lib:
+	${DLLTOOL} -d mex.def -l mex.lib
+
+# Rule to build the link libraries for the matlab functions
+libmx.lib:
+	${DLLTOOL} -d ${MEX}/libmx.def -l libmx.lib
+
+# Rule to build the link libraries for the matlab functions
+libmex.lib:
+	${DLLTOOL} -d ${MEX}/libmex.def -l libmex.lib
+
+# Rule to build the link libraries for the matlab functions
+libmat.lib:
+	${DLLTOOL} -d ${MEX}/libmat.def -l libmat.lib
+
+# Rule to build the link libraries for the matlab functions
+_libmatlbmx.lib:
+	${DLLTOOL} -d ${MEX}/_libmatlbmx.def -l _libmatlbmx.lib
+
+#------------------------------------------------------------------------
+# Tools
+
+ 
+cleanall: clean
+	/bin/rm -f *.dll
+
+clean:
+	/bin/rm -f *.c.*
+	/bin/rm -f *.o
+

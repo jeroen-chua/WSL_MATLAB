@@ -1,0 +1,28 @@
+ This make.m is used under Windows
+
+% add -largeArrayDims on 64-bit machines
+
+% mex -O -c -largeArrayDims svmL2.cpp
+% mex -O -c -largeArrayDims svm_model_matlab.c
+% mex -O -largeArrayDims svmtrainL2.c svmL2.o svm_model_matlab.o
+% mex -O -largeArrayDims svmpredictL2.c svmL2.o svm_model_matlab.o
+% mex -O -largeArrayDims libsvmread.c
+% mex -O -largeArrayDims libsvmwrite.c
+
+% mex -O -c -largeArrayDims svm.cpp
+% mex -O -c -largeArrayDims svm_model_matlab.c
+% mex -O -largeArrayDims svmtrain.c svm.o svm_model_matlab.o
+% mex -O -largeArrayDims svmpredict.c svm.o svm_model_matlab.o
+% mex -O -largeArrayDims libsvmread.c
+% mex -O -largeArrayDims libsvmwrite.c
+
+%mex -O -c -largeArrayDims dllmain.c
+%mex -O -largeArrayDims filterImage.c
+%mex -O -largeArrayDims -v COMPFLAGS="\$CC= gcc -O2 -DNDEBUG -DMATLAB_MEX_FILE -fPIC" LFLAGS="-lm" "LD= gcc" -largeArrayDims filterImage.c
+%mex -O -largeArrayDims -v COMPFLAGS="\$CC= gcc -O2 -DNDEBUG -DMATLAB_MEX_FILE -fPIC" LFLAGS="-lm" "LD= gcc" freemanPyramid.c utils.h phase.h phaseUtil.h freemanPyramid.h
+%mex -O -largeArrayDims -v COMPFLAGS="\$CC= gcc -O2 -DNDEBUG -DMATLAB_MEX_FILE -fPIC" LFLAGS="-lm" "LD= gcc" imageFile-io.V2.0.c
+%mex -O -largeArrayDims -v COMPFLAGS="\$CC= gcc -O2 -DNDEBUG -DMATLAB_MEX_FILE -fPIC" LFLAGS="-lm" "LD= gcc" mexFunction.c
+%mex -O -largeArrayDims -v COMPFLAGS="\$CC= gcc -O2 -DNDEBUG -DMATLAB_MEX_FILE -fPIC" LFLAGS="-lm" "LD= gcc" mextools.c
+%mex -O -largeArrayDims -v COMPFLAGS="\$CC= gcc -O2 -DNDEBUG -DMATLAB_MEX_FILE -fPIC" LFLAGS="-lm" "LD= gcc" phaseUtil.V4.0.c
+mex -O -largeArrayDims -v COMPFLAGS="\$CC= gcc -O2 -DNDEBUG -DMATLAB_MEX_FILE -fPIC" LFLAGS="-lm" "LD= gcc" utils.c utils.h
+
