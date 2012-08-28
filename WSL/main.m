@@ -8,6 +8,8 @@ function main(dataset,nHalf,nFrames)
         params.nFrames = nFrames;
     end
     
+    display('remove this line');
+    
     params.imSize = size(getData(params,1));
 
     save([params.saveFolder, 'paramsFile', '_nHalf', num2str(params.phiCntrl.nHalf)], 'params', '-v7.3');
