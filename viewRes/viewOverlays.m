@@ -24,7 +24,8 @@ function viewOverlays(folderUse,nHalf,nFrames)
     display('press a key')
     pause;
     
-    for (frame=1:params.nFrames)
+    frame = 1;
+    while(1)
         data = getData(params,frame);
         
         clear app;
@@ -54,6 +55,7 @@ function viewOverlays(folderUse,nHalf,nFrames)
         end
         %pause(0.02);
         pause;
+        frame = frame+1;
     end
 end
 

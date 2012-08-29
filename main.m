@@ -44,8 +44,7 @@ function main(dataset,nHalf,nFrames)
         else
             save(fName,'ct', 'ctPrev','pose','-v7.3');
         end
-
-
+        frame = frame+1;
     end
 
 end

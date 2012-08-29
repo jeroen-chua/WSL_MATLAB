@@ -12,7 +12,8 @@ function [data,status] = getData(params,frame)
     end
     
     data =  imread(fName);
+    data = double(data)/256;
     if (size(data,3) > 1)
-        data = rgb2gray(double(data)/256);
+        data = rgb2gray(data);
     end
 end
