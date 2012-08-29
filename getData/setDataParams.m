@@ -30,43 +30,31 @@ function [ct_prev,pose,params] = setDataParams(dataset,params)
             pose = [75,75,20,15,0]';
         case 10
             dataFolder = 'VTD_data_images/animal/';
-            nFrames = 71;
         case 11
             dataFolder = 'VTD_data_images/basketball/';
-            nFrames = 725;
         case 12
             dataFolder = 'VTD_data_images/football/';
-            nFrames = 362;
         case 13
             dataFolder = 'VTD_data_images/shaking/';
-            nFrames = 365;
         case 14
             dataFolder = 'VTD_data_images/singer1/';
-            nFrames = 351;
         case 15
             dataFolder = 'VTD_data_images/singer2/';
-            nFrames = 366;
         case 16
             dataFolder = 'VTD_data_images/skating1/';
-            nFrames = 400;
         case 17
             dataFolder = 'VTD_data_images/skating2/';
-            nFrames = 707;
         case 18
             dataFolder = 'VTD_data_images/soccer/';
-            nFrames = 392;
         case 20
             dataFolder = 'VTS_data_images/iron/';
-            nFrames = 165;
         case 21
             dataFolder = 'VTS_data_images/matrix/';
-            nFrames = 99;
         otherwise
             error(['Bad dataset: ', int2str(dataset)]);
     end
     
     params.dataFolder = [rootDataFolder,dataFolder];
-    params.nFrames = nFrames;
     
     if (~exist('pose','var'))
         load([rootDataFolder,dataFolder,'pose.mat'],'pose');
