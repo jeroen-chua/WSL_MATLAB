@@ -15,7 +15,7 @@ function params = initParams(dataset,nHalf)
     % Motion model parameters. These correspond to V1 and V2 in the CVPR paper.
     % Motion parameters organized as:
     % [y-translation, x-translation, rotation, scaling]
-    params.V1 = ([2,2,0.01,0.01]).^2; % slow motion prior
+    params.V1 = ([8,8,0.01,0.01]).^2; % slow motion prior
     params.V2 = ([2,2,0.01,0.01]).^2; % accel prior
     
     % Downweighting of W constraints used in the motion estimate update, deltaC.
